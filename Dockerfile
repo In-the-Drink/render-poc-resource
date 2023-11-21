@@ -1,5 +1,9 @@
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin
+CMD "apk add openjdk17-jre"
 VOLUME /tmp
-COPY target/*.jar app.jar
-EXPOSE 8080:8081
-ENTRYPOINT ["java","-jar","app.jar"]
+ARG DEPENDENCY=target/dependency
+COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY ${DEPENDENCY}/META-INF /app/META-INF
+COPY ${DEPENDENCY}/BOOT-INF/classes /app
+EXPOSE 8080
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.github.inthedrink.render.poc.resource.RenderPocResourceApplication"]

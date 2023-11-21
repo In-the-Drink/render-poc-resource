@@ -1,4 +1,4 @@
-server.port: 8081
+server.port: 8080
 
 # Disabling for now so the build passes
 spring.cloud.config:
@@ -8,3 +8,4 @@ spring.cloud.config:
 
 security.basic.enable: false
 security.ignored: /**
+
